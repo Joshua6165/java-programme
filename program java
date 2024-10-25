@@ -1,0 +1,75 @@
+package com.mycompany.main;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JLabel;
+import java.awt.GridLayout;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
+
+public class main extends JFrame {
+    private JRadioButton radioButton1;
+    private JRadioButton radioButton2;
+    private JRadioButton radioButton3;
+    private JRadioButton radioButton4;
+    private JRadioButton radioButton5;
+    private ButtonGroup buttonGroup;
+    private JLabel imageLabel; // JLabel to display images
+
+
+    public main() {
+        setTitle("Radio Button Example");
+        setSize(400, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        radioButton1 = new JRadioButton("bird");
+        radioButton2 = new JRadioButton("pig ");
+        radioButton3 = new JRadioButton("cat ");
+        radioButton4 = new JRadioButton("dog ");
+        radioButton5 = new JRadioButton("rabbit");
+
+        buttonGroup = new ButtonGroup();
+        buttonGroup.add(radioButton1);
+        buttonGroup.add(radioButton2);
+        buttonGroup.add(radioButton3);
+        buttonGroup.add(radioButton4);
+        buttonGroup.add(radioButton5);
+
+        imageLabel = new JLabel();
+        add(imageLabel); // Add image label to JFrame
+
+        JPanel panel = new JPanel(new GridLayout(5, 1)); 
+        panel.add(radioButton1);
+        panel.add(radioButton2);
+        panel.add(radioButton3);
+        panel.add(radioButton4);
+        panel.add(radioButton5);
+
+        radioButton1.addActionListener(e -> displayImage("bird.jpg"));
+        radioButton2.addActionListener(e -> displayImage("pig.jpg"));
+        radioButton3.addActionListener(e -> displayImage("cat.jpg"));
+        radioButton4.addActionListener(e -> displayImage("dog.jpg"));
+        radioButton5.addActionListener(e -> displayImage("rabbit.jpg"));
+
+        add(panel);
+
+        setVisible(true);
+    }
+
+    private void displayImage(String imageName) {
+        ImageIcon icon = new ImageIcon(imageName); // Create ImageIcon from image file
+        Image image = icon.getImage(); // Get Image from ImageIcon
+        Image scaledImage = image.getScaledInstance(300, 300, Image.SCALE_SMOOTH); // Scale image
+        icon = new ImageIcon(scaledImage); // Create new ImageIcon with scaled image
+        imageLabel.setIcon(icon); // Set scaled image to JLabel
+    }
+
+
+    public static void main(String[] args) {
+        
+        new main();
+    }
+}
